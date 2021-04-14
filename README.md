@@ -2,6 +2,7 @@
 Discord'dan, YouTube kullanabileceğiniz bot kodları.
 
 ## Kurulum
+https://youtu.be/_sFs5I3ZIQ0
 
 ## NOT!
 Kodları [buradan](https://github.com/Snowflake107/youtube-together-bot) aldım. Türkçeleştirerek, sadece YouTube özelliğini açmasını (normalde bir kaç oyun açıyor) sağladım.

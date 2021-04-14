@@ -3,10 +3,12 @@ const { Client } = require("discord.js");
 const fetch = require("node-fetch");
 const client = new Client();
 
+//Düzenlenecek tek kısım diğer kodlara ellemeyiniz.\\
 client.login("");
 const prefix = ".";
+//Düzenlenecek tek kısım diğer kodlara ellemeyiniz.\\
 
-client.on("ready", () => console.log("Larei was here!"));
+client.on("ready", () => console.log("Larei was here!"));//Bot aktif olunca, konsola yazılcak mesaj. Tırnak içindeki yazıyı değiştirebilirsiniz.
 client.on("warn", console.warn);
 client.on("error", console.error);
 

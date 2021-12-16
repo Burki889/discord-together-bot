@@ -1,4 +1,4 @@
-# discord-youtube-bot
+# discord-together-bot
 **Discord üzerinden, oyun oynayabileceğiniz, YouTube kullanabileceğiniz bot kodları.**
 
 ## Adım Adım Kurulum

@@ -1,52 +1,36 @@
-const { Client } = require("discord.js");
-const fetch = require("node-fetch");
-const client = new Client();
+const { Client, Intents, MessageEmbed } = require('discord.js');
+const { DiscordTogether } = require('discord-together');
 
-//Düzenlenecek tek kısım diğer kodlara ellemeyiniz.\\
-client.login("");
-const prefix = ".";
-//Düzenlenecek tek kısım diğer kodlara ellemeyiniz.\\
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_INVITES, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES] });
+client.discordTogether = new DiscordTogether(client);
 
-client.on("ready", () => console.log("Larei was here!"));//Bot aktif olunca, konsola yazılcak mesaj. Tırnak içindeki yazıyı değiştirebilirsiniz.
-client.on("warn", console.warn);
-client.on("error", console.error);
+// değiştirelecek tek yer
+const token = "token buraya"
+const prefix = "."
+// değiştirelecek tek yer
 
-client.on("message", async message => {
-    if (message.author.bot || !message.guild) return;
-    if (message.content.indexOf(prefix) !== 0) return;
-
-    const args = message.content.slice(prefix.length).trim().split(" ");
-    const cmd = args.shift().toLowerCase();
-
-    if (cmd === "ping") return message.channel.send(`Pong! \`${client.ws.ping}ms\``);
-
-    if (cmd === "izle") {
-        const channel = message.mentions.channels.first() || message.guild.channels.cache.get(args[0]);
-        if (!channel || channel.type !== "voice") return message.channel.send("**Hata, lütfen `.izle <sesli_kanal_id>` şeklinde kullanınız.**");
-        if (!channel.permissionsFor(message.guild.me).has("CREATE_INSTANT_INVITE")) return message.channel.send("**Hata, 'Davet Oluştur' yetkisi bulunamadı.**");
-
-        fetch(`https://discord.com/api/v8/channels/${channel.id}/invites`, {
-            method: "POST",
-            body: JSON.stringify({
-                max_age: 86400,
-                max_uses: 0,
-                target_application_id: "755600276941176913",
-                target_type: 2,
-                temporary: false,
-                validate: null
-            }),
-            headers: {
-                "Authorization": `Bot ${client.token}`,
-                "Content-Type": "application/json"
-            }
-        })
-            .then(res => res.json())
-            .then(invite => {
-                if (invite.error || !invite.code) return message.channel.send("**Hata, YouTube başlatılamadı.**");
-                message.channel.send(`**YouTube \`${channel.name}\` adlı kanalda başlatılıyor. İzlemek için lütfen <https://discord.gg/${invite.code}> tıklayınız.**`);
-            })
-            .catch(e => {
-                message.channel.send("**Hata, YouTube başlatılamadı.**");
-            })
-    }
+client.on('ready', () => {
+    console.log(`Hazır!`);
 });
+
+client.on('messageCreate', async message => { 
+    if (message.content === prefix + 'parti') {
+        message.channel.send(`
+        **:white_check_mark: Örnek kullanım:** \`${prefix}parti <etkinlik>\`\n\n**:white_small_square: Etkinlik listesi:**\n\*youtube, poker, chess, checkers, betrayal, fishing, lettertile, wordsnack, doodlecrew, spellcast, awkword, puttparty\*
+        `)
+    };
+    const args = message.content.slice(prefix.length).trim().split(" ");
+    if (message.content === prefix + 'parti' + " " + args[1]) {
+        if (message.member.voice.channel) {
+            client.discordTogether.createTogetherCode(message.member.voice.channel.id, args[1]).then(async invite => {
+                message.channel.send(`${invite.code}`);
+            }).catch(e => {
+                message.channel.send("**:x: Bir hata oluştu.**");
+            });
+        } else {
+            message.channel.send(`**:x: Lütfen herhangi bir sesli kanala giriş yapınız.**`);
+        };
+    };
+});
+
+client.login(token);

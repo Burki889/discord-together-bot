@@ -9,3 +9,5 @@
 6. Tüm işlemler tamamlandıktan sonra klasörde bulunan **baslat.bat** dosyasını çalıştırınız. (Eğer Windows dışında bir işletim sistemi kullanıyorsanız, klasörde terminal açıp `node index.js` komutunu kullanınız.)
 7. Artık botu kullanmaya hazırsınız. Botunuzu sunucuya davet ettikten sonra `.parti` komutunu kullanarak neler yapabileceğinizi görebilirsiniz.
 
+## NOT
+Herhangi bir sorun çıkması durumunda [Discord](https://discord.gg/58UtSETZgk) üzerinden iletişime geçebilirsiniz.

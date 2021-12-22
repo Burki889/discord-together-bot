@@ -1,5 +1,5 @@
 echo off
-title Discord YouTube Bot
+title Discord Together Bot
 color 17
 cls
 :a

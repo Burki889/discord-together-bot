@@ -5,8 +5,8 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 client.discordTogether = new DiscordTogether(client);
 
 // değiştirelecek tek yer
-const token = "token buraya"
-const prefix = "."
+const token = "OTM3NDQ5NTM0MTI3MjM5MjY4.Yfb56Q.OK-3Cixs0xN-6epmzu2ZNqn81P8"
+const prefix = "!"
 // değiştirelecek tek yer
 
 client.on('ready', () => {
